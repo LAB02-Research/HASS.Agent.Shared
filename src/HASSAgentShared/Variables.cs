@@ -1,0 +1,32 @@
+﻿using System;
+using CoreAudio;
+using HASSAgent.Shared.Functions;
+using HASSAgent.Shared.Models.HomeAssistant;
+using HASSAgent.Shared.Mqtt;
+
+namespace HASSAgent.Shared
+{
+    internal class Variables
+    {
+        /// <summary>
+        /// Device info
+        /// </summary>
+        internal static string DeviceName { get; set; } = string.Empty;
+
+        /// <summary>
+        /// public references
+        /// </summary>
+        internal static MMDeviceEnumerator AudioDeviceEnumerator { get; } = new MMDeviceEnumerator();
+        internal static Random Rnd { get; } = new Random();
+
+        /// <summary>
+        /// MQTT
+        /// </summary>
+        internal static IMqttManager MqttManager { get; set; }
+
+        /// <summary>
+        /// Settings
+        /// </summary>
+        internal static string CustomExecutorBinary { get; set; } = string.Empty;
+    }
+}
