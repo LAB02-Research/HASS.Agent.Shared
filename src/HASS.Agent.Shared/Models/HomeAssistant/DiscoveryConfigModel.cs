@@ -15,11 +15,13 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         /// </summary>
         /// <value></value>
         public DeviceConfigModel Device { get; set; }
+
         /// <summary>
         /// (Optional) The name of the MQTT sensor. Defaults to MQTT Sensor in hass.
         /// </summary>
         /// <value></value>
         public string Name { get; set; }
+
         /// <summary>
         /// The MQTT topic subscribed to receive sensor values.
         /// </summary>
@@ -123,6 +125,12 @@ namespace HASS.Agent.Shared.Models.HomeAssistant
         /// </summary>
         /// <value></value>
         public string Command_topic { get; set; }
+
+        /// <summary>
+        /// (Optional) The MQTT topic to set the action
+        /// </summary>
+        /// <value></value>
+        public string Action_topic { get; set; }
 
         /// <summary>
         /// (Optional) The type/class of the sensor to set the icon in the frontend. See https://www.home-assistant.io/integrations/sensor/#device-class for options.

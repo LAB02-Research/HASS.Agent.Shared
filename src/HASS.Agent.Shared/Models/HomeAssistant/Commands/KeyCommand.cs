@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
+using HASS.Agent.Shared.Enums;
 
 namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
 {
@@ -21,7 +22,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
 
         public byte KeyCode { get; set; }
 
-        public KeyCommand(byte keyCode, string name = "Key", string id = default) : base(name ?? "Key", id) => KeyCode = keyCode;
+        public KeyCommand(byte keyCode, string name = "Key", CommandEntityType entityType = CommandEntityType.Switch, string id = default) : base(name ?? "Key", entityType, id) => KeyCode = keyCode;
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
@@ -36,6 +37,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
                 Unique_id = Id,
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/sensor/{deviceConfig.Name}/availability",
                 Command_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/set",
+                Action_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/action",
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
                 Device = deviceConfig
             };
@@ -52,5 +54,10 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
         }
 
         public override void TurnOn() => keybd_event(KeyCode, 0, KEYEVENTF_EXTENTEDKEY, IntPtr.Zero);
+
+        public override void TurnOnWithAction(string action)
+        {
+            //
+        }
     }
 }

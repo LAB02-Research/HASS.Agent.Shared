@@ -1,10 +1,12 @@
-﻿namespace HASS.Agent.Shared.Models.HomeAssistant.Commands.CustomCommands
+﻿using HASS.Agent.Shared.Enums;
+
+namespace HASS.Agent.Shared.Models.HomeAssistant.Commands.CustomCommands
 {
     /// <summary>
     /// Command to restart the machine
     /// </summary>
     public class RestartCommand : CustomCommand
     {
-        public RestartCommand(string name = "Restart", string id = default) : base("shutdown /r", false, name ?? "Restart", id) => State = "OFF";
+        public RestartCommand(string name = "Restart", CommandEntityType entityType = CommandEntityType.Switch, string id = default) : base("shutdown /r", false, name ?? "Restart", entityType, id) => State = "OFF";
     }
 }

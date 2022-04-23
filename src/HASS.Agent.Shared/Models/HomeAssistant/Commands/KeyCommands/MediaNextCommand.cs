@@ -1,10 +1,12 @@
-﻿namespace HASS.Agent.Shared.Models.HomeAssistant.Commands.KeyCommands
+﻿using HASS.Agent.Shared.Enums;
+
+namespace HASS.Agent.Shared.Models.HomeAssistant.Commands.KeyCommands
 {
     /// <summary>
     /// Simulates a 'next' mediakey press
     /// </summary>
     public class MediaNextCommand : KeyCommand
     {
-        public MediaNextCommand(string name = "Next", string id = default) : base(VK_MEDIA_NEXT_TRACK, name ?? "Next", id) { }
+        public MediaNextCommand(string name = "Next", CommandEntityType entityType = CommandEntityType.Switch, string id = default) : base(VK_MEDIA_NEXT_TRACK, name ?? "Next", entityType, id) { }
     }
 }

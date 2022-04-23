@@ -59,5 +59,23 @@ namespace HASS.Agent.Shared.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to config.
+        /// </summary>
+        internal static string CommandsMod_LblSetting {
+            get {
+                return ResourceManager.GetString("CommandsMod_LblSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select an executor first (tip: doubleclick to browse)..
+        /// </summary>
+        internal static string ServiceGeneral_BtnStoreCustomExecutor_MessageBox2 {
+            get {
+                return ResourceManager.GetString("ServiceGeneral_BtnStoreCustomExecutor_MessageBox2", resourceCulture);
+            }
+        }
     }
 }

@@ -16,11 +16,17 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors.GeneralSensors.MultiVal
     {
         private readonly int _updateInterval;
 
+        public string NetworkCard { get; protected set; }
+        private readonly bool _useSpecificCard = false;
+
         public sealed override Dictionary<string, AbstractSingleValueSensor> Sensors { get; protected set; } = new Dictionary<string, AbstractSingleValueSensor>();
 
-        public NetworkSensors(int? updateInterval = null, string name = "network", string id = default) : base(name ?? "network", updateInterval ?? 30, id)
+        public NetworkSensors(int? updateInterval = null, string name = "network", string networkCard = "*", string id = default) : base(name ?? "network", updateInterval ?? 30, id)
         {
             _updateInterval = updateInterval ?? 30;
+
+            NetworkCard = networkCard;
+            _useSpecificCard = networkCard != "*" && !string.IsNullOrEmpty(networkCard);
 
             UpdateSensorValues();
         }
@@ -39,6 +45,9 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors.GeneralSensors.MultiVal
                 try
                 {
                     if (nic == null) continue;
+
+                    // test if we need to show this card
+                    if (_useSpecificCard && nic.Id != NetworkCard) continue;
 
                     // id
                     var id = nic.Id.Replace("{", "").Replace("}", "").Replace("-", "").ToLower();

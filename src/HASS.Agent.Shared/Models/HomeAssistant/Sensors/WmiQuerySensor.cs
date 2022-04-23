@@ -22,11 +22,15 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors
             ObjectQuery = new ObjectQuery(Query);
 
             // use either default or provided scope
-            var managementscope = !string.IsNullOrWhiteSpace(scope) ? new ManagementScope(scope) : new ManagementScope(@"\\localhost\");
+            var managementscope = !string.IsNullOrWhiteSpace(scope) 
+                ? new ManagementScope(scope) 
+                : new ManagementScope(@"\\localhost\");
 
             // prepare searcher
             Searcher = new ManagementObjectSearcher(managementscope, ObjectQuery);
         }
+        
+        public void Dispose() => Searcher?.Dispose();
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {

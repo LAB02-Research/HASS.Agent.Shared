@@ -11,13 +11,19 @@ namespace HASS.Agent.Shared.Models.Config
     /// </summary>
     public class ConfiguredCommand
     {
+        public Guid Id { get; set; } = Guid.Empty;
+        public string Name { get; set; } = string.Empty;
+
         [JsonConverter(typeof(StringEnumConverter))]
         public CommandType Type { get; set; }
-        public Guid Id { get; set; } = Guid.Empty;
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public CommandEntityType EntityType { get; set; } = CommandEntityType.Switch;
+
         public string Command { get; set; } = string.Empty;
+
         public byte KeyCode { get; set; }
         public bool RunAsLowIntegrity { get; set; } = false;
-        public string Name { get; set; } = string.Empty;
         public List<string> Keys { get; set; } = new List<string>();
     }
 }

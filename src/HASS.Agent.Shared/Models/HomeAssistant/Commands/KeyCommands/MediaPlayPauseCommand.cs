@@ -1,10 +1,12 @@
-﻿namespace HASS.Agent.Shared.Models.HomeAssistant.Commands.KeyCommands
+﻿using HASS.Agent.Shared.Enums;
+
+namespace HASS.Agent.Shared.Models.HomeAssistant.Commands.KeyCommands
 {
     /// <summary>
     /// Simulates a 'playpause' mediakey press
     /// </summary>
     public class MediaPlayPauseCommand : KeyCommand
     {
-        public MediaPlayPauseCommand(string name = "PlayPause", string id = default) : base(VK_MEDIA_PLAY_PAUSE, name ?? "PlayPause", id) { }
+        public MediaPlayPauseCommand(string name = "PlayPause", CommandEntityType entityType = CommandEntityType.Switch, string id = default) : base(VK_MEDIA_PLAY_PAUSE, name ?? "PlayPause", entityType, id) { }
     }
 }

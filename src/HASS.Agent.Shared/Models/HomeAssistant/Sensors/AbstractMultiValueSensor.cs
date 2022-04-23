@@ -13,7 +13,6 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors
     {
         public int UpdateIntervalSeconds { get; protected set; }
         public DateTime? LastUpdated { get; protected set; }
-        public override string Domain => "sensor";
 
         public abstract Dictionary<string, AbstractSingleValueSensor> Sensors { get; protected set; }
 
@@ -22,6 +21,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors
             Id = id == null || id == Guid.Empty.ToString() ? Guid.NewGuid().ToString() : id;
             Name = name;
             UpdateIntervalSeconds = updateIntervalSeconds;
+            Domain = "sensor";
         }
 
         public override void ClearAutoDiscoveryConfig()

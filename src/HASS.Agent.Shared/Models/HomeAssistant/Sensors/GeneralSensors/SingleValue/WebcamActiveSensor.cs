@@ -8,8 +8,10 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors.GeneralSensors.SingleVa
     /// </summary>
     public class WebcamActiveSensor : AbstractSingleValueSensor
     {
-        public override string Domain => "binary_sensor";
-        public WebcamActiveSensor(int? updateInterval = null, string name = "webcamactive", string id = default) : base(name ?? "webcamactive", updateInterval ?? 10, id) { }
+        public WebcamActiveSensor(int? updateInterval = null, string name = "webcamactive", string id = default) : base(name ?? "webcamactive", updateInterval ?? 10, id)
+        {
+            Domain = "binary_sensor";
+        }
 
         public override string GetState()
         {

@@ -1,4 +1,6 @@
-﻿namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
+﻿using HASS.Agent.Shared.Enums;
+
+namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
 {
     /// <summary>
     /// Internal commands (executed within the HASS.Agent platform)
@@ -8,7 +10,7 @@
         public string State { get; protected set; }
         public string CommandConfig { get; protected set; }
 
-        public InternalCommand(string name = "Internal", string commandConfig = "", string id = default) : base(name ?? "Internal", id)
+        public InternalCommand(string name = "Internal", string commandConfig = "", CommandEntityType entityType = CommandEntityType.Switch, string id = default) : base(name ?? "Internal", entityType, id)
         {
             State = "OFF";
             CommandConfig = commandConfig;
@@ -22,7 +24,16 @@
 
             State = "OFF";
         }
-        
+
+        public override void TurnOnWithAction(string action)
+        {
+            State = "ON";
+
+            // to be overriden
+
+            State = "OFF";
+        }
+
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
             if (Variables.MqttManager == null) return null;
@@ -36,6 +47,7 @@
                 Unique_id = Id,
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/sensor/{deviceConfig.Name}/availability",
                 Command_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/set",
+                Action_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/action",
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
                 Device = deviceConfig,
             };

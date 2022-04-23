@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HASS.Agent.Shared.Enums;
 using Serilog;
 
 namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
@@ -12,7 +13,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
     {
         public List<string> Keys { get; set; }
 
-        public MultipleKeysCommand(List<string> keys, string name = "MultipleKeys", string id = default) : base(name ?? "MultipleKeys", id) => Keys = keys;
+        public MultipleKeysCommand(List<string> keys, string name = "MultipleKeys", CommandEntityType entityType = CommandEntityType.Switch, string id = default) : base(name ?? "MultipleKeys", entityType, id) => Keys = keys;
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
@@ -27,6 +28,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
                 Unique_id = Id,
                 Availability_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/sensor/{deviceConfig.Name}/availability",
                 Command_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/set",
+                Action_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/action",
                 State_topic = $"{Variables.MqttManager.MqttDiscoveryPrefix()}/{Domain}/{deviceConfig.Name}/{ObjectId}/state",
                 Device = deviceConfig
             };
@@ -54,6 +56,11 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
             {
                 Log.Error("[COMMAND] Launching command '{name}' failed: {ex}", Name, ex.Message);
             }
+        }
+
+        public override void TurnOnWithAction(string action)
+        {
+            //
         }
     }
 }

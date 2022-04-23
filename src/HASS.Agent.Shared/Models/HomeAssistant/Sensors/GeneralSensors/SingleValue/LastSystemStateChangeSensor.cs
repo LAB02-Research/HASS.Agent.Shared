@@ -27,6 +27,6 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors.GeneralSensors.SingleVa
             });
         }
 
-        public override string GetState() => SystemStateManager.LastSystemStateEvent.ToString();
+        public override string GetState() => SharedSystemStateManager.LastSystemStateEvent.ToString();
     }
 }

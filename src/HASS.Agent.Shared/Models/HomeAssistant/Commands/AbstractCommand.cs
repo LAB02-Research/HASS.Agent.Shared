@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
+using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.Extensions;
 using MQTTnet;
 using Serilog;
 
@@ -13,12 +15,14 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
         public int UpdateIntervalSeconds => 1;
         public DateTime? LastUpdated { get; set; }
         public string PreviousPublishedState { get; set; } = string.Empty;
-        public override string Domain => "switch";
+        public CommandEntityType EntityType { get; set; }
 
-        protected AbstractCommand(string name, string id = default)
+        protected AbstractCommand(string name, CommandEntityType entityType = CommandEntityType.Switch, string id = default)
         {
             Id = id == null || id == Guid.Empty.ToString() ? Guid.NewGuid().ToString() : id;
             Name = name;
+            Domain = entityType.GetEnumMemberValue();
+            EntityType = entityType;
         }
 
         protected CommandDiscoveryConfigModel AutoDiscoveryConfigModel;
@@ -80,6 +84,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Commands
         }
 
         public abstract void TurnOn();
+        public abstract void TurnOnWithAction(string action);
         public abstract void TurnOff();
     }
 }

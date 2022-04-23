@@ -8,10 +8,13 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors.GeneralSensors.SingleVa
     /// </summary>
     public class NamedWindowSensor : AbstractSingleValueSensor
     {
-        public override string Domain => "binary_sensor";
         public string WindowName { get; protected set; }
 
-        public NamedWindowSensor(string windowName, string name = "namedwindow", int? updateInterval = 10, string id = default) : base(name ?? "namedwindow", updateInterval ?? 30, id) => WindowName = windowName;
+        public NamedWindowSensor(string windowName, string name = "namedwindow", int? updateInterval = 10, string id = default) : base(name ?? "namedwindow", updateInterval ?? 30, id)
+        {
+            Domain = "binary_sensor";
+            WindowName = windowName;
+        }
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {

@@ -15,7 +15,9 @@ namespace HASS.Agent.Shared.Extensions
         /// <returns></returns>
         public static string GetCommandName(this CommandType commandType)
         {
-            var commandName = commandType.ToString().ToLower().Replace("command", "");
+            var (_, name) = commandType.GetLocalizedDescriptionAndKey();
+            var commandName = name.ToLower();
+            
             return $"{SharedHelperFunctions.GetSafeConfiguredDeviceName()}_{commandName}";
         }
 
@@ -27,7 +29,9 @@ namespace HASS.Agent.Shared.Extensions
         /// <returns></returns>
         public static string GetCommandName(this CommandType commandType, string deviceName)
         {
-            var commandName = commandType.ToString().ToLower().Replace("command", "");
+            var (_, name) = commandType.GetLocalizedDescriptionAndKey();
+            var commandName = name.ToLower();
+            
             return $"{SharedHelperFunctions.GetSafeValue(deviceName)}_{commandName}";
         }
     }

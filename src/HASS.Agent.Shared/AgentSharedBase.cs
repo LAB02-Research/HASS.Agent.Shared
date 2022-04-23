@@ -1,4 +1,6 @@
-﻿using HASS.Agent.Shared.Mqtt;
+﻿using System.Globalization;
+using System.Threading;
+using HASS.Agent.Shared.Mqtt;
 
 namespace HASS.Agent.Shared
 {
@@ -29,6 +31,23 @@ namespace HASS.Agent.Shared
             Variables.DeviceName = deviceName;
             Variables.MqttManager = mqttManager;
             Variables.CustomExecutorBinary = customExecutorBinary;
+        }
+
+        /// <summary>
+        /// Set bindings for internal functions and variables
+        /// </summary>
+        /// <param name="deviceName"></param>
+        /// <param name="mqttManager"></param>
+        /// <param name="customExecutorBinary"></param>
+        /// <param name="culture"></param>
+        public static void Initialize(string deviceName, IMqttManager mqttManager, string customExecutorBinary, CultureInfo culture)
+        {
+            Variables.DeviceName = deviceName;
+            Variables.MqttManager = mqttManager;
+            Variables.CustomExecutorBinary = customExecutorBinary;
+
+            Thread.CurrentThread.CurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
         }
 
         /// <summary>
@@ -68,5 +87,15 @@ namespace HASS.Agent.Shared
         /// </summary>
         /// <param name="mqttManager"></param>
         public static void SetMqttManager(IMqttManager mqttManager) => Variables.MqttManager = mqttManager;
+
+        /// <summary>
+        /// Sets the culture
+        /// </summary>
+        /// <param name="culture"></param>
+        public static void SetCulture(CultureInfo culture)
+        {
+            Thread.CurrentThread.CurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+        }
     }
 }

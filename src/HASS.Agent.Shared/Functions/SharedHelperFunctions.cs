@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Text;
@@ -114,5 +116,18 @@ namespace HASS.Agent.Shared.Functions
         /// </summary>
         /// <returns></returns>
         public static string GetSafeValue(string value) => Regex.Replace(value.ToLower(), "[^a-zA-Z0-9_-]", "_");
+
+        /// <summary>
+        /// Gets the category of the provided enum
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string GetCategory(this Enum value)
+        {
+            var fieldInfo = value.GetType().GetField(value.ToString());
+            if (fieldInfo == null) return null;
+            var attribute = (CategoryAttribute)fieldInfo.GetCustomAttribute(typeof(CategoryAttribute));
+            return attribute?.Category ?? "?";
+        }
     }
 }

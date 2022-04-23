@@ -9,19 +9,29 @@ namespace HASS.Agent.Shared.Functions
     /// <summary>
     /// Monitors and logs the system's state
     /// </summary>
-    internal static class SystemStateManager
+    public static class SharedSystemStateManager
     {
-        static SystemStateManager() => Initialize();
+        static SharedSystemStateManager() => Initialize();
 
         /// <summary>
         /// Notes the last time something happened to the system's state, ie. user logged on, session locked, etc
         /// </summary>
-        internal static DateTime LastSystemStateChange { get; private set; } = DateTime.Now;
+        public static DateTime LastSystemStateChange { get; private set; } = DateTime.Now;
 
         /// <summary>
         /// Contains the last event that happened to the system, ie. user logged on, session locked, etc
         /// </summary>
-        internal static SystemStateEvent LastSystemStateEvent { get; private set; } = SystemStateEvent.HassAgentStarted;
+        public static SystemStateEvent LastSystemStateEvent { get; private set; } = SystemStateEvent.ApplicationStarted;
+
+        /// <summary>
+        /// Sets the provided system state event
+        /// </summary>
+        /// <param name="systemStateEvent"></param>
+        public static void SetSystemStateEvent(SystemStateEvent systemStateEvent)
+        {
+            LastSystemStateEvent = systemStateEvent;
+            LastSystemStateChange = DateTime.Now;
+        }
 
         /// <summary>
         /// Initializes the systemstate manager and binds to Windows' event announcements
@@ -92,7 +102,7 @@ namespace HASS.Agent.Shared.Functions
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "[SYSTEMSTATE] Error while processing change: {err}", ex.Message);
+                Log.Fatal(ex, "[SHAREDSYSTEMSTATE] Error while processing change: {err}", ex.Message);
             }
         }
     }

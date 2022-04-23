@@ -13,13 +13,13 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors
         public int UpdateIntervalSeconds { get; protected set; }
         public DateTime? LastUpdated { get; protected set; }
         public string PreviousPublishedState { get; protected set; } = string.Empty;
-        public override string Domain => "sensor";
 
         protected AbstractSingleValueSensor(string name, int updateIntervalSeconds = 10, string id = default)
         {
             Id = id == null || id == Guid.Empty.ToString() ? Guid.NewGuid().ToString() : id;
             Name = name;
             UpdateIntervalSeconds = updateIntervalSeconds;
+            Domain = "sensor";
         }
 
         protected SensorDiscoveryConfigModel AutoDiscoveryConfigModel;

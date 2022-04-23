@@ -15,7 +15,9 @@ namespace HASS.Agent.Shared.Extensions
         /// <returns></returns>
         public static string GetSensorName(this SensorType sensorType)
         {
-            var sensorName = sensorType.ToString().ToLower().Replace("sensors", "").Replace("sensor", "");
+            var (_, name) = sensorType.GetLocalizedDescriptionAndKey();
+            var sensorName = name.ToLower();
+            
             return $"{SharedHelperFunctions.GetSafeConfiguredDeviceName()}_{sensorName}";
         }
 
@@ -27,7 +29,9 @@ namespace HASS.Agent.Shared.Extensions
         /// <returns></returns>
         public static string GetSensorName(this SensorType sensorType, string deviceName)
         {
-            var sensorName = sensorType.ToString().ToLower().Replace("sensors", "").Replace("sensor", "");
+            var (_, name) = sensorType.GetLocalizedDescriptionAndKey();
+            var sensorName = name.ToLower();
+            
             return $"{SharedHelperFunctions.GetSafeValue(deviceName)}_{sensorName}";
         }
     }

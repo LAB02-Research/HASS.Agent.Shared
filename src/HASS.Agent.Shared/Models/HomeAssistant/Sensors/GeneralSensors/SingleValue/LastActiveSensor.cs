@@ -51,7 +51,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors.GeneralSensors.SingleVa
             var envTicks = Environment.TickCount;
 
             if (!GetLastInputInfo(ref lastInputInfo)) return DateTime.Now;
-            var lastInputTick = Convert.ToInt32(lastInputInfo.dwTime);
+            var lastInputTick = Convert.ToDouble(lastInputInfo.dwTime);
 
             var idleTime = envTicks - lastInputTick;
             return idleTime > 0 ? DateTime.Now - TimeSpan.FromMilliseconds(idleTime) : DateTime.Now;

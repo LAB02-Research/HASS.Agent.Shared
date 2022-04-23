@@ -142,7 +142,7 @@ namespace HASS.Agent.Shared.Functions
         }
 
         /// <summary>
-        /// Execute a command without waiting for or checking results
+        /// Execute a command in a console without a window, without waiting for or checking results
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
@@ -157,6 +157,42 @@ namespace HASS.Agent.Shared.Functions
                     CreateNoWindow = true,
                     FileName = "cmd.exe",
                     Arguments = $"/C {command}"
+                };
+
+                process.StartInfo = startInfo;
+                var start = process.Start();
+
+                if (!start)
+                {
+                    Log.Error("[CLI] Unable to start executing headless command: {command}", command);
+                    return false;
+                }
+
+                // done
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "[CLI] Fatal error when executing headless command: {command}", command);
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Execute a command without waiting for or checking results
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="arguments"></param>
+        /// <returns></returns>
+        public static bool Execute(string command, string arguments)
+        {
+            try
+            {
+                using var process = new Process();
+                var startInfo = new ProcessStartInfo
+                {
+                    FileName = command,
+                    Arguments = arguments
                 };
 
                 process.StartInfo = startInfo;

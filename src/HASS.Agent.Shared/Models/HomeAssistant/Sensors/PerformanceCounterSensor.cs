@@ -24,23 +24,14 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors
             InstanceName = instanceName;
 
             Counter = PerformanceCounters.GetSingleInstanceCounter(categoryName, counterName);
-            if (Counter == null)
-            {
-                Log.Error("[PERFMON] Counter not found: {cat}\\{name}\\{inst}", categoryName, counterName, instanceName);
-                return;
-            }
+            if (Counter == null) throw new Exception("PerformanceCounter not found");
 
             Counter.InstanceName = instanceName;
 
-            try
-            {
-                Counter.NextValue();
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, "[PERFMON] Error retrieving counter value for {cat}\\{name}\\{inst}: {msg}", categoryName, counterName, instanceName, ex.Message);
-            }
+            Counter.NextValue();
         }
+
+        public void Dispose() => Counter?.Dispose();
 
         public override DiscoveryConfigModel GetAutoDiscoveryConfig()
         {
@@ -49,7 +40,7 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors
             var deviceConfig = Variables.MqttManager.GetDeviceConfigModel();
             if (deviceConfig == null) return null;
 
-            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel()
+            return AutoDiscoveryConfigModel ?? SetAutoDiscoveryConfigModel(new SensorDiscoveryConfigModel
             {
                 Name = Name,
                 Unique_id = Id,
@@ -59,18 +50,6 @@ namespace HASS.Agent.Shared.Models.HomeAssistant.Sensors
             });
         }
         
-        public override string GetState()
-        {
-            if (Counter == null) return string.Empty;
-            try
-            {
-                return Math.Round(Counter.NextValue()).ToString(CultureInfo.InvariantCulture);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("[PERFMON] Error retrieving counter value for {cat}\\{name}\\{inst}: {msg}", CategoryName, CounterName, InstanceName, ex.Message);
-                return string.Empty;
-            }
-        }
+        public override string GetState() => Math.Round(Counter.NextValue()).ToString(CultureInfo.InvariantCulture);
     }
 }
