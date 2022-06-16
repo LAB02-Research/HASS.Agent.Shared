@@ -47,13 +47,19 @@ namespace HASS.Agent.Shared.Functions
         public static string GetSafeConfiguredDeviceName() =>
             string.IsNullOrEmpty(Variables.DeviceName)
                 ? GetSafeDeviceName()
-                : Regex.Replace(Variables.DeviceName.ToLower(), "[^a-zA-Z0-9_-]", "_");
+                : Regex.Replace(Variables.DeviceName, @"[^a-zA-Z0-9_-_\s]", "_");
 
         /// <summary>
         /// Returns a safe version of this machine's name
         /// </summary>
         /// <returns></returns>
-        public static string GetSafeDeviceName() => Regex.Replace(Environment.MachineName.ToLower(), "[^a-zA-Z0-9_-]", "_");
+        public static string GetSafeDeviceName() => Regex.Replace(Environment.MachineName, @"[^a-zA-Z0-9_-_\s]", "_");
+
+        /// <summary>
+        /// Returns a safe (lowercase) version of the provided value
+        /// </summary>
+        /// <returns></returns>
+        public static string GetSafeValue(string value) => Regex.Replace(value, @"[^a-zA-Z0-9_-_\s]", "_");
 
         /// <summary>
         /// Provides a dictionary containing the pointers and titles of all open windows
@@ -110,12 +116,6 @@ namespace HASS.Agent.Shared.Functions
                 if (processHandle != IntPtr.Zero) CloseHandle(processHandle);
             }
         }
-
-        /// <summary>
-        /// Returns a safe (lowercase) version of the provided value
-        /// </summary>
-        /// <returns></returns>
-        public static string GetSafeValue(string value) => Regex.Replace(value.ToLower(), "[^a-zA-Z0-9_-]", "_");
 
         /// <summary>
         /// Gets the category of the provided enum

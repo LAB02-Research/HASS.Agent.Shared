@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using HASS.Agent.Shared.Enums;
+using HASS.Agent.Shared.HomeAssistant;
+using HASS.Agent.Shared.HomeAssistant.Commands;
 using HASS.Agent.Shared.Models.HomeAssistant;
-using HASS.Agent.Shared.Models.HomeAssistant.Commands;
 using MQTTnet;
 
 namespace HASS.Agent.Shared.Mqtt

@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using HASS.Agent.Shared.Functions;
 using HASS.Agent.Shared.Resources.Localization;
 
 namespace HASS.Agent.Shared.Enums
 {
+    [SuppressMessage("ReSharper", "InconsistentNaming")]
     public enum HassDomain
     {
         [LocalizedDescription("HassDomain_Automation", typeof(Languages))]
@@ -21,6 +23,11 @@ namespace HASS.Agent.Shared.Enums
         [Category("cover")]
         [EnumMember(Value = "Cover")]
         Cover,
+
+        [LocalizedDescription("HassDomain_HASSAgentCommands", typeof(Languages))]
+        [Category("hass_agent_commands")]
+        [EnumMember(Value = "HASSAgentCommands")]
+        HASSAgentCommands,
 
         [LocalizedDescription("HassDomain_InputBoolean", typeof(Languages))]
         [Category("input_boolean")]

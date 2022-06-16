@@ -77,12 +77,20 @@ namespace HASS.Agent.Shared.Enums
         [EnumMember(Value = "RestartCommand")]
         RestartCommand,
 
+        [LocalizedDescription("CommandType_SendWindowToFrontCommand", typeof(Languages))]
+        [EnumMember(Value = "SendWindowToFrontCommand")]
+        SendWindowToFrontCommand,
+
         [LocalizedDescription("CommandType_ShutdownCommand", typeof(Languages))]
         [EnumMember(Value = "ShutdownCommand")]
         ShutdownCommand,
 
         [LocalizedDescription("CommandType_SleepCommand", typeof(Languages))]
         [EnumMember(Value = "SleepCommand")]
-        SleepCommand
+        SleepCommand,
+
+        [LocalizedDescription("CommandType_WebViewCommand", typeof(Languages))]
+        [EnumMember(Value = "WebViewCommand")]
+        WebViewCommand
     }
 }
