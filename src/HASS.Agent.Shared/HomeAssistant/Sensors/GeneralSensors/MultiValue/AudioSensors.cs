@@ -40,7 +40,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue
                 var parentSensorSafeName = SharedHelperFunctions.GetSafeValue(Name);
 
                 // get the default audio device
-                using (var audioDevice = Variables.AudioDeviceEnumerator.GetDefaultAudioEndpoint(EDataFlow.eRender, ERole.eMultimedia))
+                using (var audioDevice = Variables.AudioDeviceEnumerator.GetDefaultAudioEndpoint(DataFlow.eRender, Role.Multimedia))
                 {
                     // default device name
                     var defaultDeviceId = $"{parentSensorSafeName}_default_device";
@@ -110,7 +110,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue
             {
                 var errors = false;
 
-                foreach (var device in Variables.AudioDeviceEnumerator.EnumerateAudioEndPoints(EDataFlow.eRender, DeviceState.Active))
+                foreach (var device in Variables.AudioDeviceEnumerator.EnumerateAudioEndPoints(DataFlow.eRender, DeviceState.Active))
                 {
                     // process sessions (and get peak volume)
                     foreach (var session in device.AudioSessionManager2?.Sessions.Where(x => x != null))
@@ -125,7 +125,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue
 
                             // get displayname
                             string displayName;
-                            var procId = (int)session.GetProcessID;
+                            var procId = (int)session.ProcessID;
                             if (procId <= 0)
                             {
                                 // faulty process id, use the provided displayname
@@ -207,7 +207,7 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.MultiValue
             return state switch
             {
                 DeviceState.Active => "ACTIVE",
-                DeviceState.Dsiabled => "DISABLED",
+                DeviceState.Disabled => "DISABLED",
                 DeviceState.NotPresent => "NOT PRESENT",
                 DeviceState.Unplugged => "UNPLUGGED",
                 DeviceState.MaskAll => "STATEMASK_ALL",
