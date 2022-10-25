@@ -23,6 +23,14 @@ namespace HASS.Agent.Shared.Enums
         [EnumMember(Value = "BatterySensors")]
         BatterySensors,
 
+        [LocalizedDescription("SensorType_BluetoothDevicesSensor", typeof(Languages))]
+        [EnumMember(Value = "BluetoothDevicesSensor")]
+        BluetoothDevicesSensor,
+
+        [LocalizedDescription("SensorType_BluetoothLeDevicesSensor", typeof(Languages))]
+        [EnumMember(Value = "BluetoothLeDevicesSensor")]
+        BluetoothLeDevicesSensor,
+
         [LocalizedDescription("SensorType_CpuLoadSensor", typeof(Languages))]        
         [EnumMember(Value = "CpuLoadSensor")]
         CpuLoadSensor,
@@ -83,6 +91,14 @@ namespace HASS.Agent.Shared.Enums
         [EnumMember(Value = "MicrophoneActiveSensor")]
         MicrophoneActiveSensor,
 
+        [LocalizedDescription("SensorType_MicrophoneProcessSensor", typeof(Languages))]
+        [EnumMember(Value = "MicrophoneProcessSensor")]
+        MicrophoneProcessSensor,
+
+        [LocalizedDescription("SensorType_MonitorPowerStateSensor", typeof(Languages))]
+        [EnumMember(Value = "MonitorPowerStateSensor")]
+        MonitorPowerStateSensor,
+
         [LocalizedDescription("SensorType_NamedWindowSensor", typeof(Languages))]
         [EnumMember(Value = "NamedWindowSensor")]
         NamedWindowSensor,
@@ -94,6 +110,14 @@ namespace HASS.Agent.Shared.Enums
         [LocalizedDescription("SensorType_PerformanceCounterSensor", typeof(Languages))]
         [EnumMember(Value = "PerformanceCounterSensor")]
         PerformanceCounterSensor,
+
+        [LocalizedDescription("SensorType_PowershellSensor", typeof(Languages))]
+        [EnumMember(Value = "PowershellSensor")]
+        PowershellSensor,
+
+        [LocalizedDescription("SensorType_PrintersSensors", typeof(Languages))]
+        [EnumMember(Value = "PrintersSensors")]
+        PrintersSensors,
 
         [LocalizedDescription("SensorType_ProcessActiveSensor", typeof(Languages))]
         [EnumMember(Value = "ProcessActiveSensor")]
@@ -118,6 +142,14 @@ namespace HASS.Agent.Shared.Enums
         [LocalizedDescription("SensorType_WebcamActiveSensor", typeof(Languages))]
         [EnumMember(Value = "WebcamActiveSensor")]
         WebcamActiveSensor,
+
+        [LocalizedDescription("SensorType_WebcamProcessSensor", typeof(Languages))]
+        [EnumMember(Value = "WebcamProcessSensor")]
+        WebcamProcessSensor,
+
+        [LocalizedDescription("SensorType_WindowStateSensor", typeof(Languages))]
+        [EnumMember(Value = "WindowStateSensor")]
+        WindowStateSensor,
 
         [LocalizedDescription("SensorType_WindowsUpdatesSensors", typeof(Languages))]
         [EnumMember(Value = "WindowsUpdatesSensors")]

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using HASS.Agent.Shared.Managers;
 using HASS.Agent.Shared.Models.HomeAssistant;
 
 namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
@@ -25,6 +27,16 @@ namespace HASS.Agent.Shared.HomeAssistant.Sensors.GeneralSensors.SingleValue
             });
         }
 
-        public override string GetState() => Environment.UserName;
+        public override string GetState()
+        {
+            // get the active users
+            var loggedUsers = SessionsManager.GetLoggedUsers(true);
+            var loggedUsersList = loggedUsers as string[] ?? loggedUsers.ToArray();
+
+            // if there is none, our username, otherwise the first
+            return loggedUsersList.Any() ? Environment.UserName : loggedUsersList.First();
+        }
+
+        public override string GetAttributes() => string.Empty;
     }
 }
