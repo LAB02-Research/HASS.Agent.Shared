@@ -12,7 +12,7 @@
     <RepositoryUrl>https://github.com/LAB02-Research/HASS.Agent.Shared</RepositoryUrl>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>2022.22.0</Version>
+    <Version>2022.24.0</Version>
     <PackageIcon>logo_128.png</PackageIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ApplicationIcon>hassagent.ico</ApplicationIcon>
@@ -42,6 +42,7 @@
     <PackageReference Include="System.DirectoryServices.AccountManagement" Version="6.0.0" />
     <PackageReference Include="System.Management" Version="6.0.0" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="6.0.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -80,6 +81,9 @@
     <EmbeddedResource Update="Properties\Resources.nl.resx">
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.pl.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.pt-br.resx">
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
@@ -91,6 +95,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.sl.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.tr.resx">
       <DependentUpon>Resources.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Localization\Languages.de.resx">
@@ -108,6 +115,9 @@
     <EmbeddedResource Update="Resources\Localization\Languages.nl.resx">
       <DependentUpon>Languages.resx</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.pl.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Localization\Languages.pt-br.resx">
       <DependentUpon>Languages.resx</DependentUpon>
     </EmbeddedResource>
@@ -119,6 +129,9 @@
       <DependentUpon>Languages.resx</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Localization\Languages.sl.resx">
+      <DependentUpon>Languages.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Localization\Languages.tr.resx">
       <DependentUpon>Languages.resx</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
